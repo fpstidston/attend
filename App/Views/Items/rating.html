@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block body %}
+
+	<h1>Attendance by rating</h1>
+
+    <p>
+    	<a class="btn btn-primary" href="/items/new">Add an item</a>
+	</p>
+	<p>Sort
+    	<a class="btn btn-default" href="/items/index">Date</a>
+    	<a class="btn btn-default">Rating</a>
+    	<a class="btn btn-default" href="/items/titles">Title</a>
+    </p>
+
+    {% for itemsOfRating in items %}
+    <div class="list-group">
+    	<div class="list-group-item">
+    		{% set rating = itemsOfRating[0].rating - 1 %}
+			{% for i in 0..itemsOfRating[0].rating %}
+				<i class="fa fa-star"></i> 
+			{% endfor %}
+    	</div>
+
+    	{% for item in itemsOfRating %}
+    	<div class="list-group-item">
+	        <div class="media">
+	        	<!--<div class="media-left">
+	        		<i class="fa fa-star"></i>
+	        	</div>-->
+	        	<div class="media-body">
+	        		<h4 class="media-heading">{{ item.name }}</h4>
+	        		<p>{{ item.review }}</p>
+	        		<small>{{ item.date }}</small>
+	        	</div>
+	        </div>
+	    </div>
+    	{% endfor %}
+	</div>
+	{% endfor %}
+
+{% endblock %}

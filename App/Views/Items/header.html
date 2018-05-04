@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block header %}
+
+    <h1>Attend</h1>
+
+    <p>
+    	<a class="btn btn-primary" href="/items/new">Add an item</a>
+	</p>
+	<p>
+    	Show me events
+    	<a class="btn btn-default" href="/items/index">By date added</a>
+    	<a class="btn btn-default" href="/items/rating">With five stars</a>
+    	<a class="btn btn-default">With the top title</a>
+    </p>
+
+    <!--
+          <form method="get" action="/items/search" id="formSearchItems">
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <div class="form-group">
+                <input id="inputName" type="search" name="name" placeholder="Search" autofocus value="{{ item.search }}" required class="form-control" />
+            </div>
+        </form>
+
+    -->
+
+{% endblock %}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		body {
+			font-family: 
+		}
+		.weekday {
+			width: 12%;
+			display: inline-block;
+			border-left: 1px solid;
+			padding: 0.5%;
+		}
+		h4 {
+			margin-top: 0;
+		}
+		#calendar {
+			border-top: 1px solid;
+		}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			Date.prototype.toYMD = Date_toYMD;
+		    function Date_toYMD() {
+		        var year, month, day;
+		        year = String(this.getFullYear());
+		        month = String(this.getMonth() + 1);
+		        if (month.length == 1) {
+		            month = "0" + month;
+		        }
+		        day = String(this.getDate());
+		        if (day.length == 1) {
+		            day = "0" + day;
+		        }
+		        return year + "-" + month + "-" + day;
+		    }
+			var d = new Date();
+			year = String(d.getFullYear());
+		        month = String(d.getMonth() + 1);
+		        if (month.length == 1) {
+		            month = "0" + month;
+		        }
+		        day = String(d.getDate());
+		        if (day.length == 1) {
+		            day = "0" + day;
+		        }
+			var ymd =  year + "-" + month + "-" + day;
+			$(document).ready(function() {
+				$("#datetime")[0].value = ymd;
+			});
+		</script>
+	</head>
+	<body>
+		<h1>What did you do today?</h1>
+		<h2>And how was it?</h2>
+		<form id="probe" action="/" method="get">
+		<input type="text" id="whatidid"></input>
+		<select>
+			<option>Unsure</option>
+			<option>Okay</option>
+			<option>Good</option>
+			<option>Great</option>
+			<option>Amazing</option>
+		</select>
+		<input type="hidden" id="datetime">
+		<button type="submit">Enter</button>
+		</form>
+
+		<div id="calendar">
+			<h3>Week 5</h3>
+			<div class="weekday">
+				<h4>Monday</h4>
+			</div>
+			<div class="weekday">
+				<h4>Tuesday</h4>
+			</div>
+			<div class="weekday">
+				<h4>Wednesday</h4>
+			</div>
+			<div class="weekday">
+				<h4>Thursday</h4>
+			</div>
+			<div class="weekday">
+				<h4>Friday</h4>
+			</div>
+			<div class="weekday">
+				<h4>Saturday</h4>
+			</div>
+			<div class="weekday">
+				<h4>Sunday</h4>
+			</div>
+		</div>
+	</body>
+</html>
