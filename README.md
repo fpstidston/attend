@@ -1,2 +1,2 @@
-# attend
-An online agenda service
+# Attend
+An agenda service for reviewing how you spend your time
