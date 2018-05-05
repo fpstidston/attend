@@ -4,14 +4,14 @@
 
 {% block body %}
 
-    <h1>Add item</h1>
+    <h1>Add attendance</h1>
 
     <form method="post" action="/items/create" id="formAddItem">
         <input type="hidden" name="user_id" value="{{ user.id }}">
 
         <div class="form-group">
-            <label for="inputName">Title</label>
-            <input id="inputName" name="name" placeholder="Title" autofocus value="{{ item.name }}" required class="form-control" />
+            <label for="inputName">Subject</label>
+            <input id="inputName" name="name" placeholder="Subject" autofocus value="{{ item.name }}" required class="form-control" />
         </div>
         <div class="form-group">
             <label for="inputReview">Rating</label>
@@ -32,7 +32,7 @@
             <input id="inputPassword" name="date" value="{{ item.date }}" placeholder="YYYY/MM/DD" required class="form-control" />
         </div>
 
-        <button type="submit" class="btn btn-default">Add item</button>
+        <button type="submit" class="btn btn-default">Attend event</button>
 
     </form>
 

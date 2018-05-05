@@ -26,9 +26,11 @@ class Items extends Authenticated
     {
         $items = $this->getItems('id');
 
+        $stat = Item::getStat($items);
 
         View::renderTemplate('Items/index.html',[
-            'items' => $items
+            'items' => $items,
+            'stat' => $stat
         ]);
     }
 
@@ -73,19 +75,22 @@ class Items extends Authenticated
     public function ratingAction() {
         $items = $this->getItems('rating');
 
+        $stat = Item::getStat($items);
 
         View::renderTemplate('Items/rating.html',[
-            'items' => $items
+            'items' => $items,
+            'stat' => $stat
         ]);
     }
 
     public function titlesAction() {
         $items = $this->getItems('name');
 
-        // print_r($items) ;
+        $stat = Item::getStat($items);
 
         View::renderTemplate('Items/title.html',[
-            'items' => $items
+            'items' => $items,
+            'stat' => $stat
         ]);
     }
 

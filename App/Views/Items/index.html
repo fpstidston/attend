@@ -4,21 +4,21 @@
 
 {% block body %}
 
-    <h1>Attendance by date</h1>
+    <h1>Recent Events</h1>
 
     <p>
-    	<a class="btn btn-primary" href="/items/new">Add an item</a>
+    	<a class="btn btn-primary" href="/items/new">Add attendance</a>
 	</p>
-	<p>Sort
-   		<a class="btn btn-default" >Date</a>
-    	<a class="btn btn-default" href="/items/rating">Rating</a>
-    	<a class="btn btn-default" href="/items/titles">Title</a>
+	<p>
+   		<a class="btn btn-default" >Recent Events</a>
+    	<a class="btn btn-default" href="/items/rating">Best Ratings</a>
+    	<a class="btn btn-default" href="/items/titles">Regular Subjects</a>
     </p>
 
-    {% for itemsOfDate in items %}
+    {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">
-    		{% set difference = date("now"|date("Y/m/d")).diff(date(itemsOfDate[0].date|date("Y/m/d"))) %}
+    		{% set difference = date("now"|date("Y/m/d")).diff(date(itemsByGroup[0].date|date("Y/m/d"))) %}
 			{% set ago = difference.days %}
 			{% if ago == 0 %}
 				Today
@@ -27,9 +27,18 @@
 			{% else %}
 				{{ ago }} days ago
 			{% endif %}
+			<span class="badge">
+					{{ stat["counts"][itemsByGroup[0].date] }} <i class="fa fa-check-circle"></i>	       
+			</span>
+			<span class="badge">
+					{{ stat["averages"][itemsByGroup[0].date] }} <i class="fa fa-star"></i> average	       
+			</span>
+			<span class="badge">
+					{{ stat["totals"][itemsByGroup[0].date] }} <i class="fa fa-star"></i> total	       
+			</span>
     	</div>
 
-    	{% for item in itemsOfDate %}
+    	{% for item in itemsByGroup %}
     	<div class="list-group-item">
 	        <div class="media">
 	        	<div class="media-left">

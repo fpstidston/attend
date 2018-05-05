@@ -191,4 +191,34 @@ class Item extends \Core\Model
         return $sorted;
     }
 
+        public static function getStat($groupedItems) {
+
+            $groupTotals = [];
+            $groupAverages = [];
+            $groupAverages = [];
+
+            foreach ($groupedItems as $groupKey => $group ) {
+
+                $groupTotals[$groupKey] = 0;
+                $groupAverages[$groupKey] = 0;
+
+                foreach ($group as $key => $item) {
+
+                    $groupTotals[$groupKey] = $groupTotals[$groupKey] + $item->rating + 1;
+
+                }
+
+                $groupCounts[$groupKey] = count($group);
+                $groupAverages[$groupKey]  = round($groupTotals[$groupKey]/count($group),1);
+
+            }
+
+                return [
+                    'totals' => $groupTotals,
+                    'averages' => $groupAverages,
+                    'counts' => $groupCounts
+                ];
+
+        }
+
 }

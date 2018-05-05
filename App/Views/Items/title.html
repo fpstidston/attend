@@ -4,24 +4,38 @@
 
 {% block body %}
 
-    <h1>Attendance by title</h1>
+    <h1>Regular Subjects</h1>
 
     <p>
-    	<a class="btn btn-primary" href="/items/new">Add an item</a>
+    	<a class="btn btn-primary" href="/items/new">Add attendance</a>
 	</p>
-	<p>Sort
-    	<a class="btn btn-default" href="/items/index">Date</a>
-    	<a class="btn btn-default" href="/items/rating">Rating</a>
-    	<a class="btn btn-default">Title</a>
+	<p>
+    	<a class="btn btn-default" href="/items/index">Recent Events</a>
+    	<a class="btn btn-default" href="/items/rating">Best Ratings</a>
+    	<a class="btn btn-default">Regular Subjects</a>
     </p>
 
-    {% for itemsOfTitle in items %}
+    {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">
-			<h4 class="media-heading">{{ itemsOfTitle[0].name }}</h4>
+			<h4 class="media-heading" style="display:inline-block;">
+				{{ itemsByGroup[0].name }}
+			</h4>
+				
+				{% if stat["counts"][itemsByGroup[0].name] > 1 %}
+				<span class="badge">
+						{{ stat["counts"][itemsByGroup[0].name] }} <i class="fa fa-check-circle"></i>	       
+				</span>
+				<span class="badge">
+						{{ stat["averages"][itemsByGroup[0].name] }} <i class="fa fa-star"></i> average	       
+				</span>
+				<span class="badge">
+						{{ stat["totals"][itemsByGroup[0].name] }} <i class="fa fa-star"></i> total	       
+				</span>
+				{% endif %}
     	</div>
 
-    	{% for item in itemsOfTitle %}
+    	{% for item in itemsByGroup %}
     	<div class="list-group-item">
 	        <div class="media">
 	        	<div class="media-left">

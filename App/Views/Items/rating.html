@@ -4,27 +4,36 @@
 
 {% block body %}
 
-	<h1>Attendance by rating</h1>
+	<h1>Best Ratings</h1>
 
     <p>
-    	<a class="btn btn-primary" href="/items/new">Add an item</a>
+    	<a class="btn btn-primary" href="/items/new">Add attendance</a>
 	</p>
-	<p>Sort
-    	<a class="btn btn-default" href="/items/index">Date</a>
-    	<a class="btn btn-default">Rating</a>
-    	<a class="btn btn-default" href="/items/titles">Title</a>
+	<p>
+    	<a class="btn btn-default" href="/items/index">Recent Events</a>
+    	<a class="btn btn-default">Best Ratings</a>
+    	<a class="btn btn-default" href="/items/titles">Regular Subjects</a>
     </p>
 
-    {% for itemsOfRating in items %}
+    {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">
-    		{% set rating = itemsOfRating[0].rating - 1 %}
-			{% for i in 0..itemsOfRating[0].rating %}
+    		{% set rating = itemsByGroup[0].rating - 1 %}
+			{% for i in 0..itemsByGroup[0].rating %}
 				<i class="fa fa-star"></i> 
 			{% endfor %}
+			<span class="badge">
+					{{ stat["counts"][itemsByGroup[0].rating] }} <i class="fa fa-check-circle"></i>	       
+			</span>
+			<span class="badge">
+					{{ stat["averages"][itemsByGroup[0].rating] }} <i class="fa fa-star"></i> average	       
+			</span>
+			<span class="badge">
+					{{ stat["totals"][itemsByGroup[0].rating] }} <i class="fa fa-star"></i> total	       
+			</span>
     	</div>
 
-    	{% for item in itemsOfRating %}
+    	{% for item in itemsByGroup %}
     	<div class="list-group-item">
 	        <div class="media">
 	        	<div class="media-left">
