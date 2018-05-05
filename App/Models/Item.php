@@ -195,7 +195,7 @@ class Item extends \Core\Model
 
             $groupTotals = [];
             $groupAverages = [];
-            $groupAverages = [];
+            $groupCounts = [];
 
             foreach ($groupedItems as $groupKey => $group ) {
 
