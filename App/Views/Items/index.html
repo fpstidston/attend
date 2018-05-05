@@ -18,7 +18,7 @@
     {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">
-    		{% set difference = date("now"|date("Y/m/d")).diff(date(item.date|date("Y/m/d"))) %}
+    		{% set difference = date("now"|date("Y/m/d")).diff(date(itemsByGroup[0].date|date("Y/m/d"))) %}
 			{% set ago = difference.days %}
 			{% if ago == 0 %}
 				Today
