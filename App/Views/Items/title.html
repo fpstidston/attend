@@ -4,16 +4,17 @@
 
 {% block body %}
 
-    <h1>Regular Subjects</h1>
+    <h1>Events: Regular Subjects</h1>
 
     <p>
     	<a class="btn btn-primary" href="/items/new">Add attendance</a>
 	</p>
-	<p>
-    	<a class="btn btn-default" href="/items/index">Recent Events</a>
-    	<a class="btn btn-default" href="/items/rating">Best Ratings</a>
-    	<a class="btn btn-default">Regular Subjects</a>
-    </p>
+    <ul class="nav nav-tabs">
+	  <li role="presentation" ><a href="/items/index">Recent Date</a></li>
+	  <li role="presentation"><a href="/items/rating">Best Ratings</a></li>
+	  <li role="presentation" class="active"><a href="#">Regular Subjects</a></li>
+	</ul>
+	<br>
 
     {% for itemsByGroup in items %}
     <div class="list-group">
