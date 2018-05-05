@@ -6,3 +6,7 @@ Monitor attendance by building up a picture about what is really happening and w
 ### Example
 
 Imagine at school rating each class based on your own performance, the teacher, the material covered, for example. Then identifying to your parents and teachers what you like and what you’d like more help with.
+
+--
+
+Based on code by Dave Hollingworth
