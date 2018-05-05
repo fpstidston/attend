@@ -4,13 +4,13 @@
 
 {% block body %}
 
-    <h1>Events: Regular Subjects</h1>
+	<h1>Events</h1>
 
     <p>
     	<a class="btn btn-primary" href="/items/new">Add attendance</a>
 	</p>
     <ul class="nav nav-tabs">
-	  <li role="presentation" ><a href="/items/index">Recent Date</a></li>
+	  <li role="presentation" ><a href="/items/index">Recent Days</a></li>
 	  <li role="presentation"><a href="/items/rating">Best Ratings</a></li>
 	  <li role="presentation" class="active"><a href="#">Regular Subjects</a></li>
 	</ul>
@@ -50,7 +50,17 @@
 	        			{% endfor %}
 	        			{{ item.review }}
 	        		</p>
-	        		<small>{{ item.date }}</small>
+	        		<small>
+	        			{% set difference = date("now"|date("Y/m/d")).diff(date(item.date|date("Y/m/d"))) %}
+						{% set ago = difference.days %}
+						{% if ago == 0 %}
+							Today
+						{% elseif ago == 1 %}
+						 	Yesterday
+						{% else %}
+							{{ ago }} days ago
+						{% endif %}
+					</small>
 	        	</div>
 	        </div>
 	    </div>

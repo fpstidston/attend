@@ -4,13 +4,13 @@
 
 {% block body %}
 
-    <h1>Events: Recent Date</h1>
+	<h1>Events</h1>
 
     <p>
     	<a class="btn btn-primary" href="/items/new">Add attendance</a>
 	</p>
 	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="#">Recent Date</a></li>
+	  <li role="presentation" class="active"><a href="#">Recent Days</a></li>
 	  <li role="presentation"><a href="/items/rating">Best Ratings</a></li>
 	  <li role="presentation"><a href="/items/titles">Regular Subjects</a></li>
 	</ul>
@@ -18,7 +18,7 @@
     {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">
-    		{% set difference = date("now"|date("Y/m/d")).diff(date(itemsByGroup[0].date|date("Y/m/d"))) %}
+    		{% set difference = date("now"|date("Y/m/d")).diff(date(item.date|date("Y/m/d"))) %}
 			{% set ago = difference.days %}
 			{% if ago == 0 %}
 				Today
@@ -27,15 +27,17 @@
 			{% else %}
 				{{ ago }} days ago
 			{% endif %}
-			<span class="badge">
-					{{ stat["counts"][itemsByGroup[0].date] }} <i class="fa fa-check-circle"></i>	       
-			</span>
-			<span class="badge">
-					{{ stat["averages"][itemsByGroup[0].date] }} <i class="fa fa-star"></i> average	       
-			</span>
-			<span class="badge">
-					{{ stat["totals"][itemsByGroup[0].date] }} <i class="fa fa-star"></i> total	       
-			</span>
+			{% if stat["counts"][itemsByGroup[0].date] > 1 %}
+				<!-- <span class="badge">
+						{{ stat["counts"][itemsByGroup[0].date] }} <i class="fa fa-check-circle"></i>	       
+				</span> -->
+				<span class="badge">
+						{{ stat["averages"][itemsByGroup[0].date] }} <i class="fa fa-star"></i> average	       
+				</span>
+				<span class="badge">
+						{{ stat["totals"][itemsByGroup[0].date] }} <i class="fa fa-star"></i> total	       
+				</span>
+				{% endif %}
     	</div>
 
     	{% for item in itemsByGroup %}
