@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Awards{% endblock %}
+
+{% block body %}
+
+	<h1>Awards</h1>
+
+	<div class="container">
+		<div class="row">
+		{% for award in awards %}
+			<div class="col-sm-4">
+				<a href="/awards/show/{{ award.id }}">
+					<img src="{{ award.image }}"/>
+					<h4>{{ award.name }}</h4>
+					<p>{{ award.description }}</p>
+					<small>View award</small>
+				</a>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+	
+
+{% endblock %}

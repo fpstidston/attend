@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\Item;
+use \App\Models\Award;
 use \App\Flash;
 use \App\Auth;
 
@@ -24,7 +25,7 @@ class Items extends Authenticated
      */
     public function indexAction()
     {
-        $items = $this->getItems('id');
+        $items = Item::getItems('id');
 
         $stat = Item::getStat($items);
 
@@ -59,6 +60,12 @@ class Items extends Authenticated
 
             Flash::addMessage('Item added');
 
+            $items = Item::getItems('id');
+
+            if (Award::assignAwards($items)) {
+                Flash::addMessage('Award recieved!', Flash::INFO);
+            };
+
             $this->redirect('/items/index');
 
         } else {
@@ -73,7 +80,7 @@ class Items extends Authenticated
     }
 
     public function ratingAction() {
-        $items = $this->getItems('rating');
+        $items = Item::getItems('rating');
 
         $stat = Item::getStat($items);
 
@@ -84,7 +91,7 @@ class Items extends Authenticated
     }
 
     public function titlesAction() {
-        $items = $this->getItems('name');
+        $items = Item::getItems('name');
 
         $stat = Item::getStat($items);
 
@@ -92,17 +99,6 @@ class Items extends Authenticated
             'items' => $items,
             'stat' => $stat
         ]);
-    }
-
-    public static function getItems($orderby)
-    {
-        if (isset($_SESSION['user_id'])) {
-
-            return Item::findByUserID($_SESSION['user_id'],[
-                "orderby" => $orderby
-            ]);
-
-        }
     }
 
     /**

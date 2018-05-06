@@ -60,6 +60,7 @@ class Item extends \Core\Model
             $stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
 
             return $stmt->execute();
+
         }
 
         return false;
@@ -191,34 +192,46 @@ class Item extends \Core\Model
         return $sorted;
     }
 
-        public static function getStat($groupedItems) {
+    
+    public static function getItems($orderby)
+    {
+        if (isset($_SESSION['user_id'])) {
 
-            $groupTotals = [];
-            $groupAverages = [];
-            $groupCounts = [];
+            return Item::findByUserID($_SESSION['user_id'],[
+                "orderby" => $orderby
+            ]);
 
-            foreach ($groupedItems as $groupKey => $group ) {
+        }
+    }
 
-                $groupTotals[$groupKey] = 0;
-                $groupAverages[$groupKey] = 0;
+    public static function getStat($groupedItems) {
 
-                foreach ($group as $key => $item) {
+        $groupTotals = [];
+        $groupAverages = [];
+        $groupCounts = [];
 
-                    $groupTotals[$groupKey] = $groupTotals[$groupKey] + $item->rating + 1;
+        foreach ($groupedItems as $groupKey => $group ) {
 
-                }
+            $groupTotals[$groupKey] = 0;
+            $groupAverages[$groupKey] = 0;
 
-                $groupCounts[$groupKey] = count($group);
-                $groupAverages[$groupKey]  = round($groupTotals[$groupKey]/count($group),1);
+            foreach ($group as $key => $item) {
+
+                $groupTotals[$groupKey] = $groupTotals[$groupKey] + $item->rating + 1;
 
             }
 
-                return [
-                    'totals' => $groupTotals,
-                    'averages' => $groupAverages,
-                    'counts' => $groupCounts
-                ];
+            $groupCounts[$groupKey] = count($group);
+            $groupAverages[$groupKey]  = round($groupTotals[$groupKey]/count($group),1);
 
         }
+
+            return [
+                'totals' => $groupTotals,
+                'averages' => $groupAverages,
+                'counts' => $groupCounts
+            ];
+
+    }
 
 }
