@@ -29,9 +29,12 @@ class Items extends Authenticated
 
         $stat = Item::getStat($items);
 
+        $insight = Item::getBestDay($stat['totals']);
+
         View::renderTemplate('Items/index.html',[
             'items' => $items,
-            'stat' => $stat
+            'stat' => $stat,
+            'insight' => $insight
         ]);
     }
 
@@ -84,9 +87,14 @@ class Items extends Authenticated
 
         $stat = Item::getStat($items);
 
+        $itemsBySubject = Item::getItems('name');
+        $subjectStats = Item::getStat($itemsBySubject);
+        $insight = Item::getBestSubject($subjectStats['averages']);
+
         View::renderTemplate('Items/rating.html',[
             'items' => $items,
-            'stat' => $stat
+            'stat' => $stat,
+            'insight' => $insight
         ]);
     }
 
@@ -95,9 +103,12 @@ class Items extends Authenticated
 
         $stat = Item::getStat($items);
 
+        $insight = Item::getRegularestSubject($stat['counts'],$stat['averages']);
+
         View::renderTemplate('Items/title.html',[
             'items' => $items,
-            'stat' => $stat
+            'stat' => $stat,
+            'insight' => $insight
         ]);
     }
 

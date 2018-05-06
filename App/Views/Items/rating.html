@@ -20,7 +20,12 @@
 	    <h3 class="panel-title">Did you know?</h3>
 	  </div>
 	  <div class="panel-body">
-	    Your highest rated subject is Coding with an average 3.8 star rating
+	    Your highest rated subject is {{ insight.subject }} with an average {{ insight.stars }} star rating.
+	    {% if insight.stars < 3 %}
+	    	Could do better?
+	    {% elseif insight.stars > 3 %}
+	    	Worth doing that again?
+	    {% endif %}
 	  </div>
 	</div>
     {% for itemsByGroup in items %}

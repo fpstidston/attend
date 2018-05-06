@@ -234,4 +234,34 @@ class Item extends \Core\Model
 
     }
 
+    public static function getBestDay($totalsByDate) {
+
+        arsort($totalsByDate);
+
+        return [
+            'date' => key($totalsByDate),
+            'stars' => $totalsByDate[key($totalsByDate)]
+        ];
+    }
+
+    public static function getBestSubject($averagesBySubject) {
+
+        arsort($averagesBySubject);
+
+        return [
+            'subject' => key($averagesBySubject),
+            'stars' => $averagesBySubject[key($averagesBySubject)]
+        ];
+    }
+
+    public static function getRegularestSubject($countsBySubject, $averagesBySubject) {
+
+        arsort($countsBySubject);
+
+        return [
+            'subject' => key($countsBySubject),
+            'stars' => $averagesBySubject[key($countsBySubject)]
+        ];
+    }
+
 }

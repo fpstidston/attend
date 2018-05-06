@@ -20,7 +20,19 @@
 	    <h3 class="panel-title">Did you know?</h3>
 	  </div>
 	  <div class="panel-body">
-	    Your most well attended subject is Coding
+	    Your most well attended subject, {{ insight.subject }}, 
+	    {% if insight.stars < 1 %}
+	    	is going poorly. That must be unsettling?
+		{% elseif insight.stars > 1 and insight.stars < 2 %}
+			is going okay. That could be better?
+		{% elseif insight.stars > 2 and insight.stars < 3 %}
+			is going well. You must be pleased?
+		{% elseif insight.stars > 3 and insight.stars < 4 %}
+			is going great. Are you excited?
+		{% elseif insight.stars > 4 %}
+			is going fantastic. You must be thrilled?
+		{% endif %}
+
 	  </div>
 	</div>
     {% for itemsByGroup in items %}

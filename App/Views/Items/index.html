@@ -20,7 +20,20 @@
 	    <h3 class="panel-title">Did you know?</h3>
 	  </div>
 	  <div class="panel-body">
-	    Your best rated day was 5 days ago. Time to make some new memories!
+	  	{% set difference = date("now"|date("Y/m/d")).diff(date(insight.date|date("Y/m/d"))) %}
+		{% set ago = difference.days %}
+	    Your best rated day  
+		{% if ago == 0 %}
+			is Today
+		{% elseif ago == 1 %}
+		 	was Yesterday
+		{% else %}
+			was {{ ago }} days ago
+		{% endif %}
+		({{ insight.stars }} stars).
+	    {% if ago > 4 %}
+	    	Time to make some new memories?
+	    {% endif %}
 	  </div>
 	</div>
     {% for itemsByGroup in items %}
