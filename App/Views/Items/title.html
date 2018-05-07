@@ -15,6 +15,7 @@
 	  <li role="presentation" class="active"><a href="#">Regular Subjects</a></li>
 	</ul>
 	<br>
+	{% if insight %}	
 	<div class="panel panel-default">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">Did you know?</h3>
@@ -23,18 +24,19 @@
 	    Your most well attended subject, {{ insight.subject }}, 
 	    {% if insight.stars < 1 %}
 	    	is going poorly. That must be unsettling?
-		{% elseif insight.stars > 1 and insight.stars < 2 %}
+		{% elseif insight.stars > 0.9 and insight.stars < 2 %}
 			is going okay. That could be better?
-		{% elseif insight.stars > 2 and insight.stars < 3 %}
+		{% elseif insight.stars > 1.9 and insight.stars < 3 %}
 			is going well. You must be pleased?
-		{% elseif insight.stars > 3 and insight.stars < 4 %}
+		{% elseif insight.stars > 2.9 and insight.stars < 4 %}
 			is going great. Are you excited?
-		{% elseif insight.stars > 4 %}
+		{% elseif insight.stars > 3.9 %}
 			is going fantastic. You must be thrilled?
 		{% endif %}
 
 	  </div>
 	</div>
+	{% endif %}
     {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">

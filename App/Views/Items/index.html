@@ -15,6 +15,7 @@
 	  <li role="presentation"><a href="/items/titles">Regular Subjects</a></li>
 	</ul>
 	<br>
+	{% if insight %}
 	<div class="panel panel-default">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">Did you know?</h3>
@@ -31,11 +32,14 @@
 			was {{ ago }} days ago
 		{% endif %}
 		({{ insight.stars }} stars).
-	    {% if ago > 4 %}
+		{% if ago > 4 %}
 	    	Time to make some new memories?
+	    {% else %}
+	    	It must feel good to be alive?
 	    {% endif %}
 	  </div>
 	</div>
+	{% endif %}
     {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">

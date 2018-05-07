@@ -15,6 +15,7 @@
 	  <li role="presentation" ><a href="/items/titles">Regular Subjects</a></li>
 	</ul>
 	<br>
+	{% if insight %}	
 	<div class="panel panel-default">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">Did you know?</h3>
@@ -28,6 +29,7 @@
 	    {% endif %}
 	  </div>
 	</div>
+	{% endif %}
     {% for itemsByGroup in items %}
     <div class="list-group">
     	<div class="list-group-item">

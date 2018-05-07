@@ -26,7 +26,11 @@ class Awards extends Authenticated
 
         $awardIDs = Award::getUserAwardIDs($_SESSION['user_id']);
 
-        $awards = Award::getAwardsDetails($awardIDs);
+        if (!empty($awardIDs)) {
+            $awards = Award::getAwardsDetails($awardIDs);
+        } else {
+            $awards = [];
+        };
 
         View::renderTemplate('Awards/index.html',[
             'awards' => $awards

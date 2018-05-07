@@ -29,13 +29,25 @@ class Items extends Authenticated
 
         $stat = Item::getStat($items);
 
-        $insight = Item::getBestDay($stat['totals']);
+        if (count($items) < 3) {
 
-        View::renderTemplate('Items/index.html',[
-            'items' => $items,
-            'stat' => $stat,
-            'insight' => $insight
-        ]);
+            View::renderTemplate('Items/index.html',[
+                'items' => $items,
+                'stat' => $stat,
+            ]);  
+
+        } else {
+
+            $insight = Item::getBestDay($stat['totals']);
+
+            View::renderTemplate('Items/index.html',[
+                'items' => $items,
+                'stat' => $stat,
+                'insight' => $insight
+            ]);                       
+        }
+
+
     }
 
     /**
@@ -83,19 +95,31 @@ class Items extends Authenticated
     }
 
     public function ratingAction() {
-        $items = Item::getItems('rating');
+
+        $items = Item::getItems('rating'); 
 
         $stat = Item::getStat($items);
 
-        $itemsBySubject = Item::getItems('name');
-        $subjectStats = Item::getStat($itemsBySubject);
-        $insight = Item::getBestSubject($subjectStats['averages']);
+        if (count($items) < 3) {
 
-        View::renderTemplate('Items/rating.html',[
-            'items' => $items,
-            'stat' => $stat,
-            'insight' => $insight
-        ]);
+            View::renderTemplate('Items/rating.html',[
+                'items' => $items,
+                'stat' => $stat,
+            ]);  
+
+        } else {
+
+            $itemsBySubject = Item::getItems('name');
+            $subjectStats = Item::getStat($itemsBySubject);
+            $insight = Item::getBestSubject($subjectStats['averages']);
+
+            View::renderTemplate('Items/rating.html',[
+                'items' => $items,
+                'stat' => $stat,
+                'insight' => $insight
+            ]);
+
+        }
     }
 
     public function titlesAction() {
@@ -103,13 +127,26 @@ class Items extends Authenticated
 
         $stat = Item::getStat($items);
 
-        $insight = Item::getRegularestSubject($stat['counts'],$stat['averages']);
+        if (count($items) < 3) {
 
-        View::renderTemplate('Items/title.html',[
-            'items' => $items,
-            'stat' => $stat,
-            'insight' => $insight
-        ]);
+            View::renderTemplate('Items/title.html',[
+                'items' => $items,
+                'stat' => $stat,
+            ]);  
+
+        } else {
+
+            $insight = Item::getRegularestSubject($stat['counts'],$stat['averages']);
+
+            View::renderTemplate('Items/title.html',[
+                'items' => $items,
+                'stat' => $stat,
+                'insight' => $insight
+            ]);
+
+        }
+
+
     }
 
     /**
