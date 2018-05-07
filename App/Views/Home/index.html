@@ -7,7 +7,86 @@
     <h1>Welcome</h1>
 
     {% if current_user %}
-        Hello {{ current_user.name }}.
+        <p>Hello {{ current_user.name }}.</p>
+        <br>
+        {% if insights %}
+		<div class="list-group">
+			<div class="list-group-item">
+		    	<h3 class="panel-title">Insights</h3>
+			</div>
+			<div class="list-group-item">
+				<div class="media">
+		        	<div class="media-left">
+		        		<i style="color:orange" class="fa fa-lightbulb-o"></i>
+		        	</div>
+		        	<div class="media-body">
+		        		<h4 class="media-heading">Recent days</h4>
+		        		<p>
+		        			In recent days, your best rated day  
+		        			{% set difference = date("now"|date("Y/m/d")).diff(date(insights[0].date|date("Y/m/d"))) %}
+							{% set ago = difference.days %}
+							{% if ago == 0 %}
+								is Today
+							{% elseif ago == 1 %}
+							 	was Yesterday
+							{% else %}
+								was {{ ago }} days ago
+							{% endif %}
+							({{ insights[0].stars }} stars).
+						    {% if ago > 4 %}
+						    	Time to make some new memories?
+						    {% else %}
+						    	It must feel good to be alive?
+						    {% endif %}
+						</p>
+		        	</div>
+		        </div>
+			</div>
+			<div class="list-group-item">
+				<div class="media">
+		        	<div class="media-left">
+		        		<i style="color:orange" class="fa fa-lightbulb-o"></i>
+		        	</div>
+		        	<div class="media-body">
+		        		<h4 class="media-heading">Best reviews</h4>
+		        		<p>
+						    From your best reviews, your highest rated subject is {{ insights[1].subject }} with an average {{ insights[1].stars }} star rating.
+						    {% if insights[1].stars < 3 %}
+						    	Could be better?
+						    {% elseif insights[1].stars > 3 %}
+						    	Worth doing that again?
+						    {% endif %}
+		        		</p>
+		        	</div>
+		        </div>
+			</div>
+			<div class="list-group-item">
+				<div class="media">
+		        	<div class="media-left">
+		        		<i style="color:orange" class="fa fa-lightbulb-o"></i>
+		        	</div>
+		        	<div class="media-body">
+		        		<h4 class="media-heading">Regular subjects</h4>
+		        		<p>
+						    On your regular subjects, your most well attended subject, {{ insights[2].subject }},
+						    {% if insights[2].stars < 1 %}
+						    	is going poorly. That must be unsettling?
+							{% elseif insights[2].stars > 0.9 and insights[2].stars < 2 %}
+								is going okay. That could be better?
+							{% elseif insights[2].stars > 1.9 and insights[2].stars < 3 %}
+								is going well. You must be pleased?
+							{% elseif insights[2].stars > 2.9 and insights[2].stars < 4 %}
+								is going great. Are you excited?
+							{% elseif insights[2].stars > 3.9 %}
+								is going fantastic. You must be thrilled?
+							{% endif %}
+		        		</p>
+		        	</div>
+		        </div>
+			</div>
+		</div>
+		{% endif %}
+
     {% else %}
         <a href="/signup/new">Sign up</a> or <a href="/login">log in</a>.
     {% endif %}
